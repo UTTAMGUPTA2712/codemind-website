@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CodeMind Website MVP
 
-## Getting Started
+A modern, fast, and secure landing page and dashboard for CodeMind – your private, local AI second brain for codebases. Built with Next.js 14, Tailwind CSS, and NextAuth.js.
 
-First, run the development server:
+## Features
 
+- **Modern Landing Page**: High-conversion hero section and feature highlights.
+- **Secure Authentication**: GitHub OAuth integration via NextAuth.js.
+- **Protected Dashboard**: Accessible only to logged-in users.
+- **Responsive Design**: Mobile-first UI using Tailwind CSS and Radix UI primitives.
+
+## Prerequisites
+
+- Node.js 18+
+- A GitHub Account (for OAuth app setup)
+
+## Setup Instructions
+
+### 1. Clone & Install
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd codemind-website
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure Environment Variables
+Copy the template to a new local file:
+```bash
+cp .env.local.example .env.local
+```
+Then fill in the values:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**GitHub OAuth Setup:**
+1. Go to [GitHub Developer Settings](https://github.com/settings/developers).
+2. Click "New OAuth App".
+3. Set **Homepage URL** to `http://localhost:3000`.
+4. Set **Authorization callback URL** to `http://localhost:3000/api/auth/callback/github`.
+5. Copy the **Client ID** and generate a new **Client Secret**.
+6. Paste these into `.env.local`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**NextAuth Secret:**
+Generate a random secret for session encryption:
+```bash
+openssl rand -base64 32
+```
+Add it to `NEXTAUTH_SECRET` in `.env.local`.
 
-## Learn More
+### 3. Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── api/auth/[...nextauth]/route.ts  # Auth handler
+│   ├── dashboard/page.tsx               # Protected dashboard
+│   ├── layout.tsx                       # Root layout with Providers
+│   ├── page.tsx                         # Landing page
+│   └── globals.css                      # Global styles
+├── components/
+│   ├── ui/                              # Reusable UI components
+│   ├── navbar.tsx                       # Main navigation
+│   └── providers.tsx                    # Context providers
+└── lib/
+    ├── auth.ts                          # Auth configuration
+    └── utils.ts                         # Utility functions
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Next Steps (Post-MVP)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1.  **Real Download Links**: Integrate with GitHub Releases API to dynamically fetch and link the latest desktop app binaries.
+2.  **User Statistics**: Fetch real repository data for the user to show valid "indexed" repos in the dashboard.
+3.  **Pricing Page**: Add a pricing section for potential "Pro" features (cloud backup, team sync).
