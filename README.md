@@ -1,77 +1,51 @@
-# CodeMind Website MVP
+# CodeMind Website
 
-A modern, fast, and secure landing page and dashboard for CodeMind – your private, local AI second brain for codebases. Built with Next.js 14, Tailwind CSS, and NextAuth.js.
+This is the official landing page for **CodeMind**, a local AI coding assistant that runs 100% offline.
 
 ## Features
 
-- **Modern Landing Page**: High-conversion hero section and feature highlights.
-- **Secure Authentication**: GitHub OAuth integration via NextAuth.js.
-- **Protected Dashboard**: Accessible only to logged-in users.
-- **Responsive Design**: Mobile-first UI using Tailwind CSS and Radix UI primitives.
+- **100% Offline**: No code leaves your machine.
+- **Semantic Search**: Find code by meaning.
+- **Local LLMs**: Supports Ollama and various local models.
+- **Cross-Platform**: Available for Windows, macOS, and Linux.
 
-## Prerequisites
+## Tech Stack
 
-- Node.js 18+
-- A GitHub Account (for OAuth app setup)
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: Tailwind CSS
+- **UI Components**: Shadcn UI
+- **Data Fetching**: Octokit (GitHub API)
 
-## Setup Instructions
+## Getting Started
 
-### 1. Clone & Install
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/UTTAMGUPTA2712/codemind-website.git
+    cd codemind-website
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
+
+4.  Open [http://localhost:3000](http://localhost:3000) with your browser.
+
+## Building for Production
+
 ```bash
-git clone <repository-url>
-cd codemind-website
-npm install
+npm run build
 ```
 
-### 2. Configure Environment Variables
-Copy the template to a new local file:
-```bash
-cp .env.local.example .env.local
-```
-Then fill in the values:
+## Contributing
 
-**GitHub OAuth Setup:**
-1. Go to [GitHub Developer Settings](https://github.com/settings/developers).
-2. Click "New OAuth App".
-3. Set **Homepage URL** to `http://localhost:3000`.
-4. Set **Authorization callback URL** to `http://localhost:3000/api/auth/callback/github`.
-5. Copy the **Client ID** and generate a new **Client Secret**.
-6. Paste these into `.env.local`.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-**NextAuth Secret:**
-Generate a random secret for session encryption:
-```bash
-openssl rand -base64 32
-```
-Add it to `NEXTAUTH_SECRET` in `.env.local`.
+## License
 
-### 3. Run Development Server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to see the app.
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── api/auth/[...nextauth]/route.ts  # Auth handler
-│   ├── dashboard/page.tsx               # Protected dashboard
-│   ├── layout.tsx                       # Root layout with Providers
-│   ├── page.tsx                         # Landing page
-│   └── globals.css                      # Global styles
-├── components/
-│   ├── ui/                              # Reusable UI components
-│   ├── navbar.tsx                       # Main navigation
-│   └── providers.tsx                    # Context providers
-└── lib/
-    ├── auth.ts                          # Auth configuration
-    └── utils.ts                         # Utility functions
-```
-
-## Next Steps (Post-MVP)
-
-1.  **Real Download Links**: Integrate with GitHub Releases API to dynamically fetch and link the latest desktop app binaries.
-2.  **User Statistics**: Fetch real repository data for the user to show valid "indexed" repos in the dashboard.
-3.  **Pricing Page**: Add a pricing section for potential "Pro" features (cloud backup, team sync).
+[MIT](https://choosealicense.com/licenses/mit/)
